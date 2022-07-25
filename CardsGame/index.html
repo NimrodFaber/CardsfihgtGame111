@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/CardsGame/myCSS.css" />
+    <script type="text/javascript" src="/CardsGame/code.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="p1Container" class="pContainer">
+      <div class="c1"></div>
+      <div id="p1Section">
+        <div class="p1Pic">
+          <img src="/CardsGame/images/p1.png " style="background-size: cover" />
+        </div>
+        <div class="p1Details">
+          <h2>Mahmod</h2>
+          <p id="p1Result">0</p>
+        </div>
+        <div id="p1play" class="hand">
+          <img src="/CardsGame/images/playbutton.png" alt="" />
+        </div>
+      </div>
+      <div class="c3"></div>
+    </div>
+    <div class="tableContainer" id="tableContainer">
+      <div id="cardsPic">
+        <p id="CardsLeft">Cards: 52</p>
+        <img src="/CardsGame/images/cards.png" alt="" />
+      </div>
+      <div id="cardsContainer" class="cardsContainer">
+        <div id="p1Card" class="pCard"></div>
+        <div id="p2Card" class="pCard"></div>
+      </div>
+    </div>
+    <div id="p2Container" class="pContainer">
+      <div class="c1"></div>
+      <div id="p2Section">
+        <div class="p1Pic" style="margin-top: 10px">
+          <img src="/CardsGame/images/p2.png " style="background-size: cover" />
+        </div>
+        <div class="p1Details">
+          <h2>Nimrod</h2>
+          <p id="p2Result">0</p>
+        </div>
+        <div id="p2play" class="hand">
+          <img src="/CardsGame/images/playbutton.png" alt="" />
+        </div>
+      </div>
+      <div class="c3"></div>
+    </div>
+    <script>
+      fillCards();
+      // create3Cards();
+      let turn = 0;
+      document.getElementById("p1play").addEventListener("click", function () {
+        if (turn == 1 || turn == 0) {
+          let myCard;
+          if (allCards.length > 0) myCard = getCard(allCards);
+          else myCard = getCard(player1Array);
+          document.getElementById(
+            "p1Card"
+          ).innerHTML = `<img src="/CardsGame/images/${myCard.kind}/${myCard.number}.png" height="200px" width="150px">`;
+
+          if (SavedCard == 0) SavedCard = myCard;
+          else {
+            getWinner(myCard, SavedCard);
+            SavedCard = 0;
+          }
+          turn = 2;
+        }
+      });
+      document.getElementById("p2play").addEventListener("click", function () {
+        if (turn == 2 || turn == 0) {
+          let myCard;
+          if (allCards.length > 0) myCard = getCard(allCards);
+          else myCard = getCard(player2Array);
+          document.getElementById(
+            "p2Card"
+          ).innerHTML = `<img src="/CardsGame/images/${myCard.kind}/${myCard.number}.png" height="200px" width="150px">`;
+          if (SavedCard == 0) SavedCard = myCard;
+          else {
+            getWinner(SavedCard, myCard);
+            SavedCard = 0;
+          }
+          turn = 1;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #player1,
+        #player2 {
+            background-color: rgba(77, 77, 185, 0.219);
+            width: 100vw;
+            height: 200px;
+            padding: 20px;
+        }
+
+        #player2 {
+
+            position: absolute;
+            bottom: 10px;
+
+        }
+
+        button {
+            font-size: 20px;
+            background-color: yellowgreen;
+            margin-left: 100px;
+        }
+
+        span {
+            background-color: white;
+            font-size: 30px;
+
+        }
+
+        #chosenCard1,
+        #chosenCard2 {
+            background-color: rgba(240, 228, 170, 0.534);
+            height: 200px;
+            width: 150px;
+            border: 1px solid black;
+        }
+        #p1Area,#p2Area{
+            width: 400px;
+            height: 150px;
+            background-color: greenyellow;
+            position: absolute;
+            left: 450px;
+        }
+        #p2Area{
+            bottom: 0px;
+        }
+        #p1Area{
+            top: 0px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="player1">
+        <div id="p1Area"></div>
+        <span>Player 1</span>
+        <button id="getCard1">Get Card</button>
+        <div id="chosenCard1"></div>
+    </div>
+    <div id="player2">
+        <div id="p2Area"></div>
+
+        <span>Player 2</span>
+        <button id="getCard2">Get Card</button>
+        <div id="chosenCard2"></div>
+
+
+
+    </div>
+    <script>
+        let cardsArr = ["Spade", "Club", "Dimond", "Heart"];
+        let allCards = [];
+let player1Array=[];
+let player2Array=[];
+
+        let counter = 1;
+        while (counter < 53) {
+            let rndNum = Math.floor(Math.random() * 13 + 1)
+            let rndKind = cardsArr[Math.floor(Math.random() * 4)];
+            let newCard = {
+                "number": rndNum,
+                "kind": rndKind
+            }
+            const found = allCards.find(element => element.number === rndNum && element.kind == rndKind);
+            if (found == undefined) {
+                allCards.push(newCard)
+                counter++;
+            }
+        }
+        let catchCardIndex;
+        let randomCard1;
+        let randomCard2;
+        document.getElementById("getCard1").addEventListener("click", function () {
+            let randomNum=Math.floor(Math.random() * (allCards.length-1));
+            randomCard1 = allCards[randomNum]
+            // console.log("card index",randomNum);
+            // console.log("rest cards",allCards.length-1);
+            // console.log(randomCard1);
+            allCards.splice(randomNum,1)
+            if (catchCardIndex != randomCard1) {
+                catchCardIndex = randomCard1;
+                document.getElementById("chosenCard1").innerHTML =`<img src="/images/${randomCard1.kind}/${randomCard1.number}.png" height="200px" width="150px">`;
+                    // `number = ${randomCard1.number} <br> kind = ${randomCard1.kind}`;
+            }
+            if (randomCard2 != undefined) getWinner(randomCard1.number, randomCard2.number)
+        });
+        document.getElementById("getCard2").addEventListener("click", function () {
+            randomCard2 = allCards[Math.floor(Math.random() * 52)]
+            if (catchCardIndex != randomCard2) {
+                catchCardIndex = randomCard2;
+        
+                document.getElementById("chosenCard2").innerHTML =
+                `<img src="/images/${randomCard2.kind}/${randomCard2.number}.png" height="200px" width="150px">`;
+            }
+            if (randomCard1 != undefined) getWinner(randomCard1, randomCard2)
+
+        });
+
+
+        function getWinner(p1Card, p2Card) {
+            setTimeout(function () {
+                if (p1Card.number > p2Card.number) {
+                    alert(`Player 1 win =>  ${p1Card.number} > ${p2Card.number}`)
+                } else if (p1Card.number < p2Card.number) {
+                    alert(`Player 2 win =>  ${p1Card.number} > ${p2Card.number}`)
+                } else alert("EQUAAAALS")
+            }, 10);
+
+        }
+    </script>
+</body>
+
+</html>

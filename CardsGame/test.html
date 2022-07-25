@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #myDiv {
+        height: 200px;
+        width: 200px;
+        background-color: brown;
+        margin: 0 auto;
+        transition: 3s;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="getDiv">Get Div</button>
+    <button id="moveDiv">Move Div</button>
+    <div class="container">
+      <div id="myDiv"></div>
+    </div>
+
+    <script>
+      let arr = ["one", "two", "three"];
+      console.log("old arr : ", arr);
+      arr[0 , 2, 0] = "apple", "bnana", "mango"];
+      console.log("new arr : ", arr);
+
+      //   document.getElementById("getDiv").addEventListener("click", () => {
+      //     let div = document.createElement("div");
+      //     div.id = "getDiv";
+      //   });
+      //   document.getElementById("moveDiv").addEventListener("click", () => {
+      //     setTimeout(
+      //       (document.getElementById("myDiv").style.transform =
+      //         "translateY(200px)"),
+      //       5000
+      //     );
+      //     document.getElementById("myDiv").style.display = "none";
+      //   });
+    </script>
+  </body>
+</html>
